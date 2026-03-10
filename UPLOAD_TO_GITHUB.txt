@@ -1,0 +1,17 @@
+This folder contains everything to upload to your GitHub repository.
+
+MANUAL UPLOAD (browser):
+1. Go to https://github.com/Vahini333/oncomap
+2. If the repo is empty: click "uploading an existing file"
+   OR drag and drop this entire folder's CONTENTS (all files and folders inside oncomap_github) into the browser.
+3. Add commit message: "Add oncomap / vibeathon code"
+4. Commit to main branch
+
+Or: Upload the contents so the repo has:
+  - main.py, config.py, pipeline.py, etc. (all .py files)
+  - README.md, requirements.txt
+  - static/ folder (with index.html)
+  - data/ folder (with CSV and TSV files)
+  - .gitignore and docs
+
+Location of this folder: C:\Users\madhu\Downloads\oncomap_github

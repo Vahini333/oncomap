@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+*.log
+*.egg-info/
+
+# Uploads and large data (optional)
+uploads/
+vep_work/
+reports/*.pdf
+
+# IDE / system
+.cursor/
+.vscode/
+*.swp
+Thumbs.db

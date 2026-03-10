@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VCF Variant Report – VEP &amp; Personalized Drugs</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      max-width: 640px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      color: #1a1a1a;
+      background: #f8f9fa;
+    }
+    h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+    .subtitle { color: #555; font-size: 0.9rem; margin-bottom: 1.5rem; }
+    .dropzone {
+      border: 2px dashed #888;
+      border-radius: 8px;
+      padding: 2rem;
+      text-align: center;
+      background: #fff;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .dropzone:hover, .dropzone.dragover { border-color: #4472C4; background: #f0f4ff; }
+    .dropzone input { display: none; }
+    .file-name { margin-top: 0.5rem; font-size: 0.9rem; color: #333; }
+    .btn {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background: #4472C4;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    .btn:hover { background: #365a9e; }
+    .btn:disabled { background: #aaa; cursor: not-allowed; }
+    .status {
+      margin-top: 1rem;
+      padding: 0.75rem;
+      border-radius: 6px;
+      background: #e8e8e8;
+      font-size: 0.9rem;
+    }
+    .status.running { background: #fff3cd; }
+    .status.completed { background: #d4edda; }
+    .status.failed { background: #f8d7da; }
+    .download-link { margin-top: 0.5rem; }
+    .download-link a { color: #0d6efd; }
+    .error { color: #b02a37; }
+  </style>
+</head>
+<body>
+  <h1>VCF Variant Report</h1>
+  <p class="subtitle">Upload a VCF file to run Ensembl VEP, filter variants (AF &lt; 0.01, canonical, non-synonymous), and generate a PDF with genes, HGVS, biomarkers, and personalized drug recommendations (ASCO/CAP tier).</p>
+  <p class="subtitle"><a href="/vep" target="_blank">VEP API</a> (Ensembl REST) is used when local VEP is not installed.</p>
+
+  <div class="dropzone" id="dropzone">
+    <input type="file" id="fileInput" accept=".vcf,.vcf.gz">
+    <p>Drop a VCF file here or click to choose</p>
+    <p class="file-name" id="fileName"></p>
+    <button type="button" class="btn" id="runBtn" disabled>Run report</button>
+  </div>
+
+  <div class="status" id="status" style="display: none;"></div>
+  <div class="download-link" id="downloadArea" style="display: none;">
+    <a id="downloadLink" href="" download>Download PDF report</a>
+  </div>
+
+  <script>
+    const dropzone = document.getElementById('dropzone');
+    const fileInput = document.getElementById('fileInput');
+    const fileName = document.getElementById('fileName');
+    const runBtn = document.getElementById('runBtn');
+    const statusEl = document.getElementById('status');
+    const downloadArea = document.getElementById('downloadArea');
+    const downloadLink = document.getElementById('downloadLink');
+
+    let currentJobId = null;
+    let selectedFile = null;
+
+    dropzone.addEventListener('click', () => fileInput.click());
+    dropzone.addEventListener('dragover', (e) => { e.preventDefault(); dropzone.classList.add('dragover'); });
+    dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragover'));
+    dropzone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropzone.classList.remove('dragover');
+      const f = e.dataTransfer.files[0];
+      if (f && (f.name.endsWith('.vcf') || f.name.endsWith('.vcf.gz'))) {
+        fileInput.files = e.dataTransfer.files;
+        selectedFile = f;
+        fileName.textContent = f.name;
+        runBtn.disabled = false;
+      }
+    });
+    fileInput.addEventListener('change', () => {
+      const f = fileInput.files[0];
+      selectedFile = f;
+      fileName.textContent = f ? f.name : '';
+      runBtn.disabled = !f;
+    });
+
+    runBtn.addEventListener('click', async () => {
+      if (!selectedFile) return;
+      console.log('[VCF Report] Run clicked, file:', selectedFile.name);
+      runBtn.disabled = true;
+      statusEl.style.display = 'block';
+      statusEl.className = 'status';
+      statusEl.textContent = 'Uploading...';
+      downloadArea.style.display = 'none';
+
+      try {
+        const form = new FormData();
+        form.append('file', selectedFile);
+        console.log('[VCF Report] Uploading to /upload...');
+        const up = await fetch('/upload', { method: 'POST', body: form });
+        if (!up.ok) {
+          const t = await up.text();
+          console.error('[VCF Report] Upload failed:', up.status, t);
+          throw new Error(t || 'Upload failed');
+        }
+        const uploadData = await up.json();
+        const job_id = uploadData.job_id;
+        currentJobId = job_id;
+        console.log('[VCF Report] Upload OK, job_id:', job_id, '- polling for VEP → filtering → PDF...');
+        statusEl.textContent = 'Running VEP annotation...';
+        statusEl.className = 'status running';
+
+        let pollCount = 0;
+        const poll = async () => {
+          pollCount++;
+          const s = await fetch('/status/' + job_id);
+          if (!s.ok) {
+            console.error('[VCF Report] Status request failed:', s.status);
+            throw new Error(await s.text());
+          }
+          const data = await s.json();
+          if (pollCount === 1 || data.status === 'completed' || data.status === 'failed' || pollCount % 5 === 0) {
+            console.log('[VCF Report] Poll #' + pollCount + ' status=' + data.status + ' message=' + (data.message || ''));
+          }
+          statusEl.textContent = data.message || data.status;
+          statusEl.className = 'status ' + data.status;
+          if (data.status === 'completed') {
+            console.log('[VCF Report] Completed. variant_count=' + (data.variant_count ?? ''));
+            downloadLink.href = '/report/' + job_id;
+            downloadLink.download = 'variant_report.pdf';
+            downloadArea.style.display = 'block';
+            runBtn.disabled = false;
+            return;
+          }
+          if (data.status === 'failed') {
+            console.error('[VCF Report] Job failed:', data.error || data.message);
+            statusEl.innerHTML = 'Failed: ' + (data.error || data.message || 'Unknown error');
+            statusEl.classList.add('error');
+            runBtn.disabled = false;
+            return;
+          }
+          setTimeout(poll, 1500);
+        };
+        await poll();
+      } catch (err) {
+        console.error('[VCF Report] Error:', err);
+        statusEl.textContent = 'Error: ' + (err.message || String(err));
+        statusEl.className = 'status failed';
+        statusEl.classList.add('error');
+        runBtn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>

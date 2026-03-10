@@ -1,0 +1,65 @@
+Gene,HGVSc,HGVSp,Cancer Type,Associated Drug(s),ASCO Evidence Tier,Clinical Notes
+KRAS,c.35G>A,p.Gly12Asp,PDAC,Investigational KRAS G12D inhibitors,Tier II,Common driver; predictive of resistance
+TP53,c.818G>A,p.Arg273His,PDAC,None,Tier IV,"Tumor suppressor, prognostic"
+SMAD4,c.1244_1247del,p.Glu415fs,PDAC,None,Tier IV,Associated with poor prognosis
+CDKN2A,c.238C>T,p.Arg80*,PDAC,CDK4/6 inhibitors (trial),Tier III,Cell-cycle dysregulation
+ARID1A,c.3948del,p.Asn1316fs,PDAC,ATR inhibitors (trial),Tier III,Synthetic lethality
+RNF43,c.394C>T,p.Arg132*,PDAC,Wnt inhibitors (trial),Tier III,Wnt pathway activation
+KMT2C,c.15133C>T,p.Arg5045*,PDAC,None,Tier IV,Epigenetic modifier
+LRP1B,c.11125G>A,p.Glu3709Lys,PDAC,Immune checkpoint inhibitors (exploratory),Tier III,Associated with high TMB
+TGFBR2,c.944del,p.Ser315fs,PDAC,TGF-beta inhibitors (trial),Tier III,Pathway alteration
+ATM,c.7271T>G,p.Val2424Gly,PDAC,"Olaparib, PARP inhibitors",Tier I,DDR pathway
+GNAS,c.601C>T,p.Arg201Cys,PDAC/IPMN,None,Tier IV,Common in IPMN
+RBM10,c.764G>A,p.Gly255Asp,PDAC,None,Tier IV,Limited actionability
+KMT2D,c.15952C>T,p.Arg5318*,PDAC,Epigenetic therapy (trial),Tier IV,Exploratory
+KDM6A,c.2800C>T,p.Arg934*,PDAC,EZH2 inhibitors (trial),Tier III,Epigenetic vulnerability
+CSMD3,c.4123G>A,p.Arg1375Gln,PDAC,None,Tier IV,Passenger mutation
+FAT3,c.8902C>T,p.Arg2968Trp,PDAC,None,Tier IV,Limited evidence
+ACVR1B,c.1052C>T,p.Arg351Trp,PDAC,TGF-beta inhibitors (trial),Tier III,Pathway relevance
+SMARCA4,c.3760C>T,p.Arg1254*,PDAC,EZH2 inhibitors (trial),Tier III,Chromatin remodeling
+FBXW7,c.1513C>T,p.Arg505Cys,PDAC,mTOR inhibitors (exploratory),Tier III,Oncoprotein accumulation
+U2AF1,c.101C>T,p.Ser34Phe,PDAC,Spliceosome inhibitors (trial),Tier III,Splicing alteration
+MAP2K4,c.257T>G,p.Val86Gly,PDAC,None,Tier IV,MAPK pathway
+SETD2,c.5839C>T,p.Arg1947*,PDAC,None,Tier IV,Histone methylation
+ACVR2A,c.1372del,p.Asn458fs,PDAC,TGF-beta inhibitors (trial),Tier III,TGF-beta signaling
+PIK3CA,c.3140A>G,p.His1047Arg,PDAC,PI3K inhibitors (trial),Tier II,Oncogenic hotspot
+SF3B1,c.2098A>G,p.Lys700Glu,PDAC,Spliceosome inhibitors (trial),Tier III,RNA splicing
+FAT1,c.12862C>T,p.Arg4288*,PDAC,None,Tier IV,Cell adhesion
+CTNND2,c.2245G>A,p.Arg749His,PDAC,None,Tier IV,Limited evidence
+CTNNA2,c.4516C>T,p.Arg1506*,PDAC,None,Tier IV,Structural protein
+NCOA1,c.1801C>T,p.Arg601Trp,PDAC,Hormonal pathway agents (exploratory),Tier IV,Coactivator
+ZNF521,c.2953G>A,p.Arg985His,PDAC,None,Tier IV,Transcription factor
+FAM135B,c.1822C>T,p.Arg608Cys,PDAC,None,Tier IV,Limited relevance
+FBLN2,c.841G>A,p.Gly281Ser,PDAC,None,Tier IV,Extracellular matrix
+NF2,c.784C>T,p.Arg262*,PDAC,FAK inhibitors (trial),Tier III,Hippo pathway
+BCOR,c.4900C>T,p.Arg1634*,PDAC,None,Tier IV,Epigenetic regulator
+WT1,c.1118C>T,p.Arg373Cys,PDAC,Immunotherapy (exploratory),Tier IV,Transcriptional regulator
+KMT2A,c.4448C>T,p.Arg1483*,PDAC,None,Tier IV,Chromatin modification
+ALPK1,c.710G>A,p.Gly237Asp,PDAC,None,Tier IV,Inflammatory signaling
+CDH10,c.1805G>A,p.Arg602His,PDAC,None,Tier IV,Cell adhesion
+FCRL4,c.1288C>T,p.Arg430*,PDAC,None,Tier IV,Immune regulation
+LPA,c.4126C>T,p.Arg1376Cys,PDAC,None,Tier IV,Lipid metabolism
+FMN2,c.5167C>T,p.Arg1723*,PDAC,None,Tier IV,Cytoskeleton
+PEG3,c.2041C>T,p.Arg681*,PDAC,None,Tier IV,Imprinted gene
+COL6A6,c.6124G>A,p.Gly2042Ser,PDAC,None,Tier IV,Extracellular matrix
+NFATC2,c.2533C>T,p.Arg845Trp,PDAC,None,Tier IV,Transcription factor
+PTPN3,c.1855C>T,p.Arg619*,PDAC,None,Tier IV,Tyrosine phosphatase
+BRCA2,c.6174delT,p.Ser1982fs,PDAC,"Olaparib, PARP inhibitors",Tier I,Strong clinical actionability
+MARK2,c.1489C>T,p.Arg497Cys,PDAC,None,Tier IV,Cell polarity kinase; exploratory
+DCC,c.1327C>T,p.Arg443*,PDAC,None,Tier IV,Tumor suppressor; prognostic
+BCORL1,c.3526C>T,p.Arg1176*,PDAC,None,Tier IV,Epigenetic corepressor
+SETD1B,c.6283C>T,p.Arg2095*,PDAC,Epigenetic therapy (trial),Tier IV,Histone methyltransferase
+ARID1B,c.4312C>T,p.Arg1438*,PDAC,ATR inhibitors (trial),Tier III,SWI/SNF complex
+COL1A1,c.934G>A,p.Gly312Ser,PDAC,None,Tier IV,Extracellular matrix remodeling
+CXCR4,c.1000C>T,p.Arg334*,PDAC,"Plerixafor, CXCR4 inhibitors (trial)",Tier II,Tumor–stroma interaction
+CUX1,c.2068C>T,p.Arg690*,PDAC,None,Tier IV,Transcription factor
+SMAD3,c.859C>T,p.Arg287Trp,PDAC,TGF-beta inhibitors (trial),Tier III,TGF-beta signaling
+ARID2,c.2269C>T,p.Arg757*,PDAC,ATR inhibitors (trial),Tier III,Chromatin remodeling
+DROSHA,c.406C>T,p.Arg136*,PDAC,None,Tier IV,miRNA processing
+ARHGAP5,c.2159G>A,p.Arg720His,PDAC,None,Tier IV,Rho GTPase signaling
+IRS4,c.2623C>T,p.Arg875*,PDAC,PI3K/AKT inhibitors (trial),Tier III,Insulin signaling
+PTPRT,c.742C>T,p.Arg248*,PDAC,None,Tier IV,STAT3 regulation
+KDM5C,c.2425C>T,p.Arg809*,PDAC,Epigenetic therapy (trial),Tier IV,Histone demethylase
+PTPRD,c.1901C>T,p.Arg634*,PDAC,None,Tier IV,Tumor suppressor phosphatase
+LATS1,c.1756C>T,p.Arg586*,PDAC,Hippo pathway inhibitors (trial),Tier III,Hippo signaling
+SETDB1,c.3037C>T,p.Arg1013*,PDAC,Epigenetic therapy (trial),Tier III,Histone methylation

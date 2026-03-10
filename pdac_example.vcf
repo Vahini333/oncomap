@@ -1,0 +1,11 @@
+##fileformat=VCFv4.2
+##reference=GRCh38
+##source=PDAC_example_for_vibeathon
+##description=Pancreatic ductal adenocarcinoma (PDAC) example variants - key drivers matching knowledge base
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	PDAC_SAMPLE
+12	25380275	.	G	A	.	PASS	.	GT:AD	0/1:15,8
+17	7676154	.	G	A	.	PASS	.	GT:AD	0/1:12,6
+9	21967752	.	C	T	.	PASS	.	GT:AD	0/1:10,5
+3	178952085	.	A	G	.	PASS	.	GT:AD	0/1:14,7
+11	108093211	.	T	G	.	PASS	.	GT:AD	0/1:9,4
+13	32315476	.	C	T	.	PASS	.	GT:AD	0/1:11,3
